@@ -1,0 +1,97 @@
+{
+  "project_info": {
+    "project_number": "1096416478174",
+    "project_id": "my-first-firebase-projec-dabab",
+    "storage_bucket": "my-first-firebase-projec-dabab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096416478174:android:ed88f1fdda0f597296d34f",
+        "android_client_info": {
+          "package_name": "com.zhdanon.mysights2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096416478174-5dfekv4egsov16uvd1ul2b5nnnfv60g2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtSL2iJP7ifIXtAlII4YqBfspucggM5Kc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096416478174-5dfekv4egsov16uvd1ul2b5nnnfv60g2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096416478174:android:c9cd8444e96e603096d34f",
+        "android_client_info": {
+          "package_name": "com.zhdanon.mytestfirebaseapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096416478174-5dfekv4egsov16uvd1ul2b5nnnfv60g2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtSL2iJP7ifIXtAlII4YqBfspucggM5Kc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096416478174-5dfekv4egsov16uvd1ul2b5nnnfv60g2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096416478174:android:989331f82e12a1dc96d34f",
+        "android_client_info": {
+          "package_name": "com.zhdanon.myyandexmap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096416478174-5dfekv4egsov16uvd1ul2b5nnnfv60g2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtSL2iJP7ifIXtAlII4YqBfspucggM5Kc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096416478174-5dfekv4egsov16uvd1ul2b5nnnfv60g2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

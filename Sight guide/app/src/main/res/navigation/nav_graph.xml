@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/GMapFragment">
+
+    <fragment
+        android:id="@+id/GMapFragment"
+        android:name="com.zhdanon.mysights2.presentation.GMapFragment"
+        android:label="@string/app_name">
+        <action
+            android:id="@+id/action_GMapFragment_to_fragmentCurrentSight"
+            app:destination="@id/fragmentCurrentSight" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentCurrentSight"
+        android:name="com.zhdanon.mysights2.presentation.FragmentCurrentSight"
+        android:label="@string/fragment_current_sight">
+        <action
+            android:id="@+id/action_fragmentCurrentSight_to_GMapFragment"
+            app:destination="@id/GMapFragment" />
+    </fragment>
+</navigation>

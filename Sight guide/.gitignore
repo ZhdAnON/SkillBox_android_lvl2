@@ -1,0 +1,9 @@
+.gradle
+.idea
+build
+local.properties
+README.md
+app/src/test
+app/src/androidTest
+app/proguard-rules.pro
+app/build

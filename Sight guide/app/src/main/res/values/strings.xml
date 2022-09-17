@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Куда сходить?</string>
+
+    <string name="KEY_API_GOOGLE_MAP">AIzaSyAAPvCs3UJiZgFPk1zSUbPybBCIXq4lNWw</string>
+    <string name="KEY_OSM_API">5ae2e3f221c38a28845f05b626b180c87df86e3ed1f5d1d655687468</string>
+
+    <string name="coordinates">Широта - %.4f, Долгота - %.4f</string>
+    <string name="speed">%.1f км/ч</string>
+    <string name="tv_show_location">Показать на карте</string>
+    <string name="hint_image">Here is image</string>
+    <string name="fragment_current_sight">Об объекте</string>
+
+    <string name="notification_sight_nameless_title">Жаль, но вокруг Вас есть безымянные объекты</string>
+    <string name="notification_sight_nameless_text">Не огорчайтесь, я всё равно покажу их на карте</string>
+</resources>
