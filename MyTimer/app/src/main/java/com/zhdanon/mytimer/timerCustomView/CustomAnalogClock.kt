@@ -24,15 +24,10 @@ class CustomAnalogClock : View {
 
     var timer = TimeState(0L, false)
         set(value) {
-            if (value.isPlayed == field.isPlayed &&
-                value.time % 1000 != 0L &&
-                value.time / 1000 == field.time / 1000)
-                return
+            if (value == field) return
             field = value
-            invalidate()
             timerListeners.forEach { it(value) }
         }
-    private var startTime = 0L
 
     private val mClockHoursMap = mapOf(
         1 to "I",
@@ -118,25 +113,24 @@ class CustomAnalogClock : View {
             canvas?.drawText(tmp, x.toFloat(), y.toFloat(), mPaint)
         }
 
-        val currentTime = currentTime()
-        var hour = ((currentTime - startTime) / (1000 * 3600)).toInt()
+        var hour = ((timer.time) / (1000 * 3600)).toInt()
         hour = if (hour > 12) hour - 12 else hour
 
         drawLine(
             canvas!!,
-            (hour + ((currentTime - startTime) / (1000 * 60)) / 60) * 5f,
+            (hour + (timer.time / (1000 * 60)) / 60) * 5f,
             isHour = true,
             isSecond = false
         )
         drawLine(
             canvas,
-            ((currentTime - startTime) / (1000 * 60)).toFloat(),
+            (timer.time / (1000 * 60)).toFloat(),
             isHour = false,
             isSecond = false
         )
         drawLine(
             canvas,
-            ((currentTime - startTime) / 1000).toFloat(),
+            (timer.time / 1000).toFloat(),
             isHour = false,
             isSecond = true
         )
@@ -157,21 +151,18 @@ class CustomAnalogClock : View {
     }
 
     fun start() {
-        timer.apply {
-            this.time = currentTime()
-            this.isPlayed = true
-        }
-        // Timer-coroutine
-        val timerProcess = myScope.launch(Dispatchers.Main) {
-            startTime = currentTime()
+        timer.isPlayed = true
+
+        // Timer coroutine
+        val timerProcess = myScope.launch(Dispatchers.Main, start = CoroutineStart.LAZY) {
+            val startTime = currentTime()
             while (true) {
                 delay(998)
-                val currentTime = currentTime()
-                timer = TimeState(currentTime - startTime, true)
-                Log.d(TAG, "start: ${timer.time}")
+                timer = TimeState(currentTime() - startTime, true)
                 invalidate()
             }
         }
+
         // TimerState-coroutine
         myScope.launch {
             while (true) {
@@ -191,7 +182,6 @@ class CustomAnalogClock : View {
             this.time = 0L
             this.isPlayed = false
         }
-        startTime = currentTime()
         invalidate()
     }
 
@@ -202,9 +192,5 @@ class CustomAnalogClock : View {
     fun addUpdateListener(listener: (TimeState) -> Unit) {
         timerListeners.add(listener)
         listener(timer)
-    }
-
-    companion object {
-        private const val TAG = "CustomAnalogClock"
     }
 }
