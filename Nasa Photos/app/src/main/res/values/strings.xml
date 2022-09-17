@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">NasaPhotos</string>
+    <string name="get_sol">Показать</string>
+
+    <string name="rover_name">Rover: %1$s</string>
+    <string name="rover_camera_name">Camera: %1$s</string>
+    <string name="rover_sol">Sol: %d</string>
+    <string name="rover_date">Date: %1$s</string>
+
+</resources>

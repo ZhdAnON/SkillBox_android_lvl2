@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentNasaPhotos">
+
+    <fragment
+        android:id="@+id/fragmentNasaPhotos"
+        android:name="com.zhdanon.nasaphotos.presentation.FragmentNasaPhotos"
+        android:label="FragmentNasaPhotos" >
+        <action
+            android:id="@+id/action_fragmentNasaPhotos_to_fragmentCurrentPhoto"
+            app:destination="@id/fragmentCurrentPhoto" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentCurrentPhoto"
+        android:name="com.zhdanon.nasaphotos.presentation.FragmentCurrentPhoto"
+        android:label="FragmentCurrentPhoto" >
+        <action
+            android:id="@+id/action_fragmentCurrentPhoto_to_fragmentNasaPhotos"
+            app:destination="@id/fragmentNasaPhotos" />
+    </fragment>
+</navigation>
