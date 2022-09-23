@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Rick and Morty API</string>
+
+    <string name="tv_title_last_location">Last known location:</string>
+    <string name="tv_title_first_seen">First seen in:</string>
+    <string name="status_line">%s - %s</string>
+
+    <string name="label_character_list">Characters list</string>
+
+    <string name="label_last_location">Last location:</string>
+    <string name="label_gender">Gender:</string>
+    <string name="label_origin">Origin:</string>
+    <string name="label_episodes">List of episodes in which this character appeared:</string>
+    <string name="error_message">Oops… Something went wrong!\nCheck your internet connection…</string>
+    <string name="reload">Try again…</string>
+</resources>

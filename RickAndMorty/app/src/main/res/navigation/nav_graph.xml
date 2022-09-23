@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentRickAndMortyCharacters">
+
+    <fragment
+        android:id="@+id/fragmentRickAndMortyCharacters"
+        android:name="com.zhdanon.rickandmortyapi.presentation.FragmentRaMCharacters"
+        android:label="@string/label_character_list"
+        tools:layout="@layout/fragment_characters_list_rv">
+        <action
+            android:id="@+id/action_fragmentRickAndMortyCharacters_to_fragmentCurrentCharacter"
+            app:destination="@id/fragmentCurrentCharacter" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentCurrentCharacter"
+        android:name="com.zhdanon.rickandmortyapi.presentation.FragmentCurrentCharacter"
+        android:label="FragmentCurrentCharacter"
+        tools:layout="@layout/fragment_current_character">
+        <action
+            android:id="@+id/action_fragmentCurrentCharacter_to_fragmentRickAndMortyCharacters"
+            app:destination="@id/fragmentRickAndMortyCharacters" />
+        <argument
+            android:name="currentCharacter"
+            app:argType="com.zhdanon.rickandmortyapi.data.characters.ResultCharacterDto" />
+    </fragment>
+</navigation>
