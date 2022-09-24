@@ -9,9 +9,11 @@ import androidx.paging.cachedIn
 import com.zhdanon.rickandmortyapi.data.RaMPagingSource
 import com.zhdanon.rickandmortyapi.data.characters.ResultCharacterDto
 import com.zhdanon.rickandmortyapi.domain.GetRAMUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+@HiltViewModel
 class RaMViewModel @Inject constructor(
     private val getRaMUseCase: GetRAMUseCase
 ) : ViewModel() {

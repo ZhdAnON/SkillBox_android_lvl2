@@ -1,9 +1,7 @@
 package com.zhdanon.rickandmortyapi.presentation
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,7 +15,6 @@ import com.zhdanon.rickandmortyapi.databinding.FragmentCharactersListRvBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class FragmentRaMCharacters : Fragment() {
@@ -26,9 +23,7 @@ class FragmentRaMCharacters : Fragment() {
 
     private lateinit var pagedAdapter: RaMAdapterRV
 
-    @Inject
-    lateinit var ramViewModelFactory: RaMViewModelFactory
-    private val viewModel: RaMViewModel by viewModels { ramViewModelFactory }
+    private val viewModel: RaMViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,7 +64,7 @@ class FragmentRaMCharacters : Fragment() {
             binding.swipeRefresh.isRefreshing = currentState == LoadState.Loading
             binding.rvProgressbar.isVisible = currentState == LoadState.Loading
             when (currentState) {
-                is LoadState.Error-> {
+                is LoadState.Error -> {
                     binding.charactersList.visibility = View.GONE
                     binding.loadState.visibility = View.VISIBLE
                 }
