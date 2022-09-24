@@ -23,36 +23,39 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/load_state"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
-        <ProgressBar
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/rv_progressbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/load_state_lottie" />
 
         <TextView
             android:id="@+id/rv_tv_error_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="20sp"
             android:layout_marginBottom="16dp"
+            android:gravity="center"
             android:text="@string/error_message"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/rv_btn_refresh" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/rv_btn_refresh"
+            style="@style/ButtonsStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/ButtonsStyle"
             android:text="@string/reload"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

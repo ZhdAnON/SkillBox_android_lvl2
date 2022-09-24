@@ -51,7 +51,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Fragment
-    implementation 'androidx.fragment:fragment-ktx:1.5.2'
+    implementation 'androidx.fragment:fragment-ktx:1.5.3'
 
     // Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
@@ -69,9 +69,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.13.0'
 
-    // Glide
-    implementation 'com.github.bumptech.glide:glide:4.13.2'
-
     // RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
@@ -82,4 +79,10 @@ dependencies {
     // Hilt
     implementation "com.google.dagger:hilt-android:2.42"
     kapt "com.google.dagger:hilt-compiler:2.42"
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+
+    // Lottie
+    implementation 'com.airbnb.android:lottie:5.0.3'
 }
