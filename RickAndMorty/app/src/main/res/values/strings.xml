@@ -11,6 +11,11 @@
     <string name="label_gender">Gender:</string>
     <string name="label_origin">Origin:</string>
     <string name="label_episodes">List of episodes in which this character appeared:</string>
+
     <string name="error_message">Oops… Something went wrong!\nCheck your internet connection…</string>
     <string name="reload">Try again…</string>
+
+    <string name="filter_hint">Filter</string>
+    <string name="filter_to_location">Filter to location</string>
+    <string name="filter_to_name">Filter to name</string>
 </resources>

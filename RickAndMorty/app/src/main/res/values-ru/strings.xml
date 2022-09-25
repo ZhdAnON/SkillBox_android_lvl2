@@ -12,7 +12,10 @@
     <string name="label_origin">Родина:</string>
     <string name="label_episodes">Список эпизодов, в которых появился этот персонаж:</string>
 
+    <string name="error_message">Упс… Что-то пошло не так!\nПроверьте соединение с интернетом…</string>
+    <string name="reload">Попробовать снова…</string>
 
-    <string name="error_message">Упс... Что-то пошло не так!\nПроверьте соединение с интернетом...</string>
-    <string name="reload">Попробовать снова...</string>
+    <string name="filter_hint">Фильтровать</string>
+    <string name="filter_to_location">По расположению…</string>
+    <string name="filter_to_name">По имени…</string>
 </resources>
