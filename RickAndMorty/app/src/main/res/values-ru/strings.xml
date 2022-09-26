@@ -18,4 +18,15 @@
     <string name="filter_hint">Фильтровать</string>
     <string name="filter_to_location">По расположению…</string>
     <string name="filter_to_name">По имени…</string>
+
+    <string name="dialog_title">Задайте параметры фильтрации</string>
+    <string name="label_filter_status">По статусу</string>
+    <string name="title_filter_gender">По полу</string>
+    <string name="status_alive">Жив</string>
+    <string name="status_gender">Мёртв</string>
+    <string name="gender_Male">Мужчина</string>
+    <string name="gender_female">Женщина</string>
+    <string name="status_unknown">Пол не известен</string>
+    <string name="btn_filter_title">Фильтровать</string>
+    <string name="btn_clear_filter">Очистить фильтр</string>
 </resources>

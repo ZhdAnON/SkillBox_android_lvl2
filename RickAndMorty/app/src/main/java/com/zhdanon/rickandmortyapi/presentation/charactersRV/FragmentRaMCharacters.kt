@@ -1,4 +1,4 @@
-package com.zhdanon.rickandmortyapi.presentation
+package com.zhdanon.rickandmortyapi.presentation.charactersRV
 
 import android.os.Bundle
 import android.view.*
@@ -6,7 +6,7 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
@@ -15,6 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.zhdanon.rickandmortyapi.R
 import com.zhdanon.rickandmortyapi.data.characters.ResultCharacterDto
 import com.zhdanon.rickandmortyapi.databinding.FragmentCharactersListRvBinding
+import com.zhdanon.rickandmortyapi.presentation.DialogFilter
+import com.zhdanon.rickandmortyapi.presentation.RaMAdapterRV
+import com.zhdanon.rickandmortyapi.presentation.RaMViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -23,10 +26,11 @@ import kotlinx.coroutines.flow.onEach
 class FragmentRaMCharacters : Fragment() {
     private var _binding: FragmentCharactersListRvBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var menuHost: MenuHost
 
-    private val viewModel: RaMViewModel by viewModels()
-    private lateinit var pagedAdapter: RaMAdapterRV
+    private val viewModel: RaMViewModel by activityViewModels()
+//    private lateinit var pagedAdapter: RaMAdapterRV
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +45,7 @@ class FragmentRaMCharacters : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Установка custom OptionMenu
-        setCustomMenu()
+        setFilterMenu()
 
         // установка адаптера RecyclerView
         setRecyclerAdapter()
@@ -52,8 +56,8 @@ class FragmentRaMCharacters : Fragment() {
         // обработка состояний загрузки списка персонажей
         stateLoadingListener()
 
-        binding.swipeRefresh.setOnRefreshListener { pagedAdapter.refresh() }
-        binding.rvBtnRefresh.setOnClickListener { pagedAdapter.retry() }
+        binding.swipeRefresh.setOnRefreshListener { viewModel.pagedAdapter.refresh() }
+        binding.rvBtnRefresh.setOnClickListener { viewModel.pagedAdapter.retry() }
     }
 
     override fun onDestroyView() {
@@ -61,27 +65,13 @@ class FragmentRaMCharacters : Fragment() {
         _binding = null
     }
 
-    private fun setCustomMenu() {
-        menuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.menu_filter, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return true
-            }
-
-        }, viewLifecycleOwner)
-    }
-
     private fun setRecyclerAdapter() {
-        pagedAdapter = RaMAdapterRV { onItemClick(it) }
+        viewModel.pagedAdapter = RaMAdapterRV { onItemClick(it) }
         binding.charactersList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        val tryAgainAction = { pagedAdapter.retry() }
+        val tryAgainAction = { viewModel.pagedAdapter.retry() }
         binding.charactersList.adapter =
-            pagedAdapter.withLoadStateFooter(LoadStateAdapterRV(tryAgainAction))
+            viewModel.pagedAdapter.withLoadStateFooter(LoadStateAdapterRV(tryAgainAction))
         (binding.charactersList.itemAnimator as? DefaultItemAnimator)?.supportsChangeAnimations =
             false
     }
@@ -97,12 +87,12 @@ class FragmentRaMCharacters : Fragment() {
 
     private fun getCharactersList() {
         viewModel.pagedCharacters.onEach {
-            pagedAdapter.submitData(it)
+            viewModel.pagedAdapter.submitData(it)
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun stateLoadingListener() {
-        pagedAdapter.loadStateFlow.onEach { state ->
+        viewModel.pagedAdapter.loadStateFlow.onEach { state ->
             val currentState = state.refresh
             binding.swipeRefresh.isRefreshing = currentState == LoadState.Loading
             binding.rvProgressbar.isVisible = currentState == LoadState.Loading
@@ -117,5 +107,32 @@ class FragmentRaMCharacters : Fragment() {
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+    private fun setFilterMenu() {
+        menuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_filter, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                when (menuItem.itemId) {
+                    R.id.action_filter -> {
+                        val fm = childFragmentManager
+                        val filterDialog = DialogFilter()
+                        filterDialog.show(fm, DialogFilter.SHOW_FILTER_DIALOG)
+                    }
+                    R.id.action_clear_filter -> {
+                        viewModel.pagedAdapter.refresh()
+                        viewModel.setFilterParams(
+                            status = "",
+                            gender = ""
+                        )
+                    }
+                }
+                return true
+            }
+        }, viewLifecycleOwner)
     }
 }

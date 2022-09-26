@@ -12,9 +12,9 @@ class RaMRepository @Inject constructor() {
         .build()
         .create(RaMApi::class.java)
 
-    suspend fun getCharacters(count: Int, pages: Int): CharactersDto {
+    suspend fun getCharacters(count: Int, pages: Int, status: String, gender: String): CharactersDto {
 //        if (pages % 5 == 0) throw IllegalStateException("Что-то пошло не так...")
-        return retrofit.getAllCharacters(count, pages)
+        return retrofit.getAllCharacters(count, pages, status, gender)
     }
 
     companion object {

@@ -26,10 +26,23 @@
         <item name="android:background">#5A4C4C</item>
     </style>
 
-    <style name="Information">
+    <style name="Labels_landscape">
         <item name="android:textSize">16sp</item>
         <item name="fontFamily">sans-serif-medium</item>
         <item name="android:textColor">#C9BCBC</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">4dp</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:gravity">end</item>
+        <item name="android:background">#5A4C4C</item>
+    </style>
+
+    <style name="Information">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:gravity">start</item>
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:paddingStart">4dp</item>
@@ -37,9 +50,20 @@
         <item name="android:background">#554D4D</item>
     </style>
 
+    <style name="Information_landscape">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">start</item>
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:background">#554D4D</item>
+    </style>
+
     <style name="ButtonsStyle">
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:background">@drawable/custom_button_effect</item>
+        <item name="android:backgroundTint">@color/item_background</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:padding">8dp</item>
     </style>

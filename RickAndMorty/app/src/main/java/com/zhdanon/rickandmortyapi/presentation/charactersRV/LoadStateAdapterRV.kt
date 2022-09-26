@@ -1,4 +1,4 @@
-package com.zhdanon.rickandmortyapi.presentation
+package com.zhdanon.rickandmortyapi.presentation.charactersRV
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

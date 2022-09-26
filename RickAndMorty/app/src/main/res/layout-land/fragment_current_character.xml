@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF6C5555"
+    android:padding="8dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/current_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginVertical="8dp"
+        android:maxHeight="300dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <!-- Created -->
+    <TextView
+        android:id="@+id/label_origin"
+        style="@style/Labels_landscape"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/label_origin"
+        app:layout_constraintEnd_toStartOf="@id/current_created"
+        app:layout_constraintHorizontal_weight="0.4"
+        app:layout_constraintStart_toEndOf="@id/current_avatar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/current_created"
+        style="@style/Information_landscape"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="0.6"
+        app:layout_constraintStart_toEndOf="@id/label_origin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Gender -->
+    <TextView
+        android:id="@+id/label_gender"
+        style="@style/Labels_landscape"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/label_gender"
+        app:layout_constraintTop_toBottomOf="@id/label_origin"
+        app:layout_constraintStart_toEndOf="@id/current_avatar"
+        app:layout_constraintEnd_toStartOf="@id/current_gender"
+        app:layout_constraintHorizontal_weight="0.4" />
+
+    <TextView
+        android:id="@+id/current_gender"
+        app:layout_constraintTop_toBottomOf="@id/current_created"
+        app:layout_constraintStart_toEndOf="@id/label_gender"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Information_landscape"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_weight="0.6" />
+
+    <!-- Last location -->
+    <TextView
+        android:id="@+id/label_location"
+        style="@style/Labels_landscape"
+        app:layout_constraintTop_toBottomOf="@id/label_gender"
+        app:layout_constraintStart_toEndOf="@id/current_avatar"
+        app:layout_constraintEnd_toStartOf="@id/current_location"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/label_last_location"
+        app:layout_constraintHorizontal_weight="0.4" />
+
+    <TextView
+        android:id="@+id/current_location"
+        app:layout_constraintTop_toBottomOf="@id/current_gender"
+        app:layout_constraintStart_toEndOf="@id/label_location"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Information_landscape"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_weight="0.6" />
+
+    <!-- Episodes -->
+    <TextView
+        android:id="@+id/label_episodes"
+        style="@style/Labels_landscape"
+        app:layout_constraintTop_toBottomOf="@id/label_location"
+        app:layout_constraintStart_toEndOf="@id/current_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="@string/label_episodes" />
+
+    <ScrollView
+        android:id="@+id/scroll_episodes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@id/current_avatar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_episodes">
+
+        <TextView
+            android:id="@+id/current_episodes"
+            style="@style/Information_landscape"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/label_episodes" />
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

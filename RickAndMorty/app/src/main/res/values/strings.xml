@@ -18,4 +18,15 @@
     <string name="filter_hint">Filter</string>
     <string name="filter_to_location">Filter to location</string>
     <string name="filter_to_name">Filter to name</string>
+
+    <string name="dialog_title">Please, set filter params</string>
+    <string name="label_filter_status">Filter by status</string>
+    <string name="title_filter_gender">Filter by gender</string>
+    <string name="status_alive">Alive</string>
+    <string name="status_gender">Dead</string>
+    <string name="gender_Male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="status_unknown">Unknown</string>
+    <string name="btn_filter_title">FILTER</string>
+    <string name="btn_clear_filter">Clear filter</string>
 </resources>

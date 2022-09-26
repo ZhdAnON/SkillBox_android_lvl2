@@ -6,7 +6,8 @@ import com.zhdanon.rickandmortyapi.data.characters.ResultCharacterDto
 import com.zhdanon.rickandmortyapi.domain.GetRAMUseCase
 
 class RaMPagingSource(
-    private val getRAMUseCase: GetRAMUseCase
+    private val getRAMUseCase: GetRAMUseCase,
+    private val filterParams: FilterParams
 ) : PagingSource<Int, ResultCharacterDto>() {
     override fun getRefreshKey(state: PagingState<Int, ResultCharacterDto>): Int = FIRST_PAGE
 
@@ -15,7 +16,9 @@ class RaMPagingSource(
         return kotlin.runCatching {
             getRAMUseCase.executeCharacters(
                 count = 10,
-                pages = page
+                pages = page,
+                status = filterParams.paramStatus,
+                gender = filterParams.paramGender
             )
         }.fold(
             onSuccess = {

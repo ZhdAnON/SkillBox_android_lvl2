@@ -8,6 +8,8 @@ interface RaMApi {
     @GET("character")
     suspend fun getAllCharacters(
         @Query("count") count: Int,
-        @Query("pages") pages: Int
+        @Query("pages") pages: Int,
+        @Query("status") status: String = "",
+        @Query("gender") gender: String = ""
     ): CharactersDto
 }
