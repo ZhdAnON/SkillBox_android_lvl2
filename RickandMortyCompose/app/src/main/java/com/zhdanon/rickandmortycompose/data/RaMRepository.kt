@@ -21,8 +21,8 @@ class RaMRepository @Inject constructor() {
         return retrofit.getAllCharacters(count, pages, status, gender)
     }
 
-    suspend fun getEpisodeInfo(): EpisodeDto {
-        return retrofit.getEpisodeInfo()
+    suspend fun getEpisodeInfo(episodeId: String): List<EpisodeDto> {
+        return retrofit.getEpisodeInfo(episodeId)
     }
 
     companion object {

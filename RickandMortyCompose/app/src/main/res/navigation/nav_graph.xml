@@ -19,5 +19,8 @@
         <action
             android:id="@+id/action_currentCharacterFragment_to_charactersListFragment"
             app:destination="@id/charactersListFragment" />
+        <argument
+            android:name="character"
+            app:argType="com.zhdanon.rickandmortycompose.data.characters.ResultCharacterDto" />
     </fragment>
 </navigation>

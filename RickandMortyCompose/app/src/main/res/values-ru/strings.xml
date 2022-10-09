@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Rick and Morty API</string>
+
+    <string name="title_last_location">Последнее местоположение:</string>
+    <string name="title_first_seen">Встетился первый раз:</string>
+    <string name="title_status">Жизненный статус:</string>
+    <string name="title_species_gender">Раса и пол:</string>
+    <string name="status_line">%s - %s</string>
+    <string name="label_episodes">Список эпизодов, в которых появился этот персонаж:</string>
+
+    <string name="reload">Попробовать снова…</string>
+
+    <string name="dialog_title">Задайте параметры фильтрации</string>
+    <string name="label_filter_status">По статусу</string>
+    <string name="label_filter_gender">По половому признаку</string>
+    <string name="label_status_alive">Жив</string>
+    <string name="status_alive">Alive</string>
+    <string name="label_status_dead">Мёртв</string>
+    <string name="status_dead">Dead</string>
+    <string name="label_gender_male">Мужчина</string>
+    <string name="gender_male">Male</string>
+    <string name="label_gender_female">Женщина</string>
+    <string name="gender_female">Female</string>
+    <string name="label_gender_genderless">Безполый</string>
+    <string name="gender_genderless">Genderless</string>
+    <string name="label_gender_unknown">Пол не известен</string>
+    <string name="gender_unknown">Unknown</string>
+    <string name="btn_filter_title">Фильтровать</string>
+    <string name="btn_clear_filter">Очистить фильтр</string>
+</resources>

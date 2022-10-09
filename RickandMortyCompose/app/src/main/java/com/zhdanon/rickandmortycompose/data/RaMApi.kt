@@ -2,6 +2,7 @@ package com.zhdanon.rickandmortycompose.data
 
 import com.zhdanon.rickandmortycompose.data.characters.CharactersDto
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RaMApi {
@@ -13,6 +14,8 @@ interface RaMApi {
         @Query("gender") gender: String = ""
     ): CharactersDto
 
-    @GET("episode")
-    suspend fun getEpisodeInfo(): EpisodeDto
+    @GET("episode/{episode_id}")
+    suspend fun getEpisodeInfo(
+        @Path("episode_id") episodeId: String
+    ): List<EpisodeDto>
 }

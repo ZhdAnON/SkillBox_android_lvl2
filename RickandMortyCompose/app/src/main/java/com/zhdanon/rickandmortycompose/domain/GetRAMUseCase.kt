@@ -17,7 +17,7 @@ class GetRAMUseCase @Inject constructor(
         return ramRepository.getCharactersList(count, pages, status, gender)
     }
 
-    suspend fun executeEpisodeInfo(): EpisodeDto {
-        return ramRepository.getEpisodeInfo()
+    suspend fun executeEpisodeInfo(episodeId: String): List<EpisodeDto> {
+        return ramRepository.getEpisodeInfo(episodeId)
     }
 }

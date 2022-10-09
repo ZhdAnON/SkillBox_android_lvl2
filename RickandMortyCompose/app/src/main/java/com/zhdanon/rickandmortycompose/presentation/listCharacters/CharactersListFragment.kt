@@ -23,10 +23,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -57,22 +58,22 @@ class CharactersListFragment : Fragment() {
                     color = MaterialTheme.colors.primary,
                     contentColor = MaterialTheme.colors.onPrimary
                 ) {
-                    val characters: LazyPagingItems<ResultCharacterDto> =
-                        pagingData.collectAsLazyPagingItems()
+                    val characters: LazyPagingItems<ResultCharacterDto> = pagingData.collectAsLazyPagingItems()
                     Column {
                         MyTopBar(
-                            onClearClick = { viewModel.setFilterParams("", "") },
                             onClick = { status: String, gender: String ->
                                 viewModel.setFilterParams(status, gender)
+                                characters.refresh()
+                            },
+                            onClearClick = {
+                                viewModel.setFilterParams("", "")
                                 characters.refresh()
                             }
                         )
                         Spacer(modifier = Modifier.padding(top = 4.dp))
                         CharactersListView(
                             list = characters,
-                            onImageClick = {
-                                findNavController().navigate(R.id.action_charactersListFragment_to_currentCharacterFragment)
-                            }
+                            onImageClick = { onItemClick((it)) }
                         )
                         Spacer(modifier = Modifier.padding(bottom = 8.dp))
                     }
@@ -84,14 +85,14 @@ class CharactersListFragment : Fragment() {
     @Composable
     private fun CharactersListView(
         list: LazyPagingItems<ResultCharacterDto>,
-        onImageClick: () -> Unit,
+        onImageClick: (character: ResultCharacterDto) -> Unit,
         modifier: Modifier = Modifier
     ) {
         LazyColumn {
             items(list) {
                 it?.let {
                     ItemCharacter(
-                        onImageClick = { onImageClick() },
+                        onImageClick = { onImageClick(it) },
                         character = it,
                         modifier = modifier.padding(vertical = 4.dp)
                     )
@@ -122,10 +123,14 @@ class CharactersListFragment : Fragment() {
                     loadState.refresh is LoadState.Error -> {
                         val e = list.loadState.refresh as LoadState.Error
                         item {
-                            Column(modifier = modifier.fillParentMaxSize()) {
+                            Column(
+                                modifier = modifier
+                                    .fillParentMaxSize(),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
                                 e.error.localizedMessage?.let { Text(text = it) }
                                 Button(onClick = { retry() }) {
-                                    Text(text = "Retry")
+                                    Text(text = stringResource(id = R.string.reload))
                                 }
                             }
                         }
@@ -135,11 +140,12 @@ class CharactersListFragment : Fragment() {
                         item {
                             Column(
                                 modifier = modifier.fillParentMaxSize(),
-                                verticalArrangement = Arrangement.Center
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
                             ) {
                                 e.error.localizedMessage?.let { Text(text = it) }
                                 Button(onClick = { retry() }) {
-                                    Text(text = "Retry")
+                                    Text(text = stringResource(id = R.string.reload))
                                 }
                             }
                         }
@@ -151,27 +157,27 @@ class CharactersListFragment : Fragment() {
 
     @Composable
     fun MyTopBar(
-        onClearClick: () -> Unit,
         onClick: (String, String) -> Unit,
+        onClearClick: () -> Unit,
         modifier: Modifier = Modifier
     ) {
         TopAppBar {
             Text(
                 text = stringResource(id = R.string.app_name),
-                style = MaterialTheme.typography.h5
+                style = MaterialTheme.typography.h5,
+                modifier = modifier.padding(start = 8.dp)
             )
             Spacer(modifier.weight(1f, true))
 
             var openDialogValue by remember { mutableStateOf(false) }
             IconButton(
                 onClick = {
-//                    onFilterClick()
                     openDialogValue = !openDialogValue
                 }
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_filter),
-                    contentDescription = "Информация о приложении"
+                    contentDescription = stringResource(id = R.string.btn_filter_title)
                 )
             }
             if (openDialogValue) {
@@ -183,7 +189,7 @@ class CharactersListFragment : Fragment() {
             IconButton(onClick = { onClearClick() }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_cleaning),
-                    contentDescription = "Избранное"
+                    contentDescription = stringResource(id = R.string.btn_clear_filter)
                 )
             }
         }
@@ -191,7 +197,7 @@ class CharactersListFragment : Fragment() {
 
     @Composable
     fun ItemCharacter(
-        onImageClick: () -> Unit,
+        onImageClick: (character: ResultCharacterDto) -> Unit,
         character: ResultCharacterDto,
         modifier: Modifier = Modifier
     ) {
@@ -211,7 +217,7 @@ class CharactersListFragment : Fragment() {
                     modifier = modifier
                         .size(150.dp)
                         .clip(CircleShape)
-                        .clickable { onImageClick() }
+                        .clickable { onImageClick(character) }
                 )
                 Spacer(
                     modifier
@@ -232,7 +238,7 @@ class CharactersListFragment : Fragment() {
                     Text(
                         text = stringResource(
                             id = R.string.status_line,
-                            character.status ?: "unknown",
+                            character.status ?: "unknown status",
                             character.species
                         ),
                         style = MaterialTheme.typography.body1,
@@ -240,10 +246,11 @@ class CharactersListFragment : Fragment() {
                     )
                     Spacer(modifier = modifier.padding(top = 14.dp))
                     Text(
-                        text = stringResource(id = R.string.tv_title_last_location),
+                        text = stringResource(id = R.string.title_last_location),
                         style = MaterialTheme.typography.subtitle1.copy(
                             color = Color.Black,
-                            fontStyle = FontStyle.Italic
+                            fontStyle = FontStyle.Italic,
+                            fontSize = 16.sp
                         )
                     )
                     Text(
@@ -286,6 +293,14 @@ class CharactersListFragment : Fragment() {
         }
     }
 
+    private fun onItemClick(character: ResultCharacterDto) {
+        val action =
+            CharactersListFragmentDirections.actionCharactersListFragmentToCurrentCharacterFragment(
+                character
+            )
+        findNavController().navigate(action)
+    }
+
     @Composable
     fun FilterDialog(
         onClick: (String, String) -> Unit,
@@ -301,7 +316,7 @@ class CharactersListFragment : Fragment() {
                 modifier = modifier
                     .padding(8.dp)
                     .fillMaxWidth()
-                    .size(width = 200.dp, height = 500.dp)
+                    .size(width = 200.dp, height = 550.dp)
             ) {
 
                 // Заголовок
@@ -328,8 +343,8 @@ class CharactersListFragment : Fragment() {
                     )
                 }
                 if (statusShow) {
-                    val labelAlive = stringResource(id = R.string.status_alive)
-                    val labelDead = stringResource(id = R.string.status_dead)
+                    val labelAlive = stringResource(id = R.string.label_status_alive)
+                    val labelDead = stringResource(id = R.string.label_status_dead)
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = modifier.padding(top = 4.dp, start = 32.dp)
@@ -376,9 +391,10 @@ class CharactersListFragment : Fragment() {
                     )
                 }
                 if (genderShow) {
-                    val labelMale = stringResource(id = R.string.gender_male)
-                    val labelFemale = stringResource(id = R.string.gender_female)
-                    val labelUnknown = stringResource(id = R.string.gender_unknown)
+                    val labelMale = stringResource(id = R.string.label_gender_male)
+                    val labelFemale = stringResource(id = R.string.label_gender_female)
+                    val labelGenderless = stringResource(id = R.string.label_gender_genderless)
+                    val labelUnknown = stringResource(id = R.string.label_gender_unknown)
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = modifier.padding(top = 4.dp, start = 32.dp)
@@ -410,6 +426,19 @@ class CharactersListFragment : Fragment() {
                         modifier = modifier.padding(top = 4.dp, start = 32.dp)
                     ) {
                         RadioButton(
+                            selected = genderChecked == labelGenderless,
+                            onClick = { genderChecked = labelGenderless }
+                        )
+                        Text(
+                            text = labelGenderless,
+                            style = MaterialTheme.typography.body1
+                        )
+                    }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = modifier.padding(top = 4.dp, start = 32.dp)
+                    ) {
+                        RadioButton(
                             selected = genderChecked == labelUnknown,
                             onClick = { genderChecked = labelUnknown }
                         )
@@ -423,7 +452,25 @@ class CharactersListFragment : Fragment() {
                 // Сохранение параметров фильтра
                 Button(
                     onClick = {
-                        onClick(statusChecked, genderChecked)
+                        val status = when (statusChecked) {
+                            requireContext().resources.getString(R.string.label_status_alive) ->
+                                requireContext().resources.getString(R.string.status_alive)
+                            requireContext().resources.getString(R.string.label_status_dead) ->
+                                requireContext().resources.getString(R.string.status_dead)
+                            else -> ""
+                        }
+                        val gender = when (genderChecked) {
+                            requireContext().resources.getString(R.string.label_gender_male) ->
+                                requireContext().resources.getString(R.string.gender_male)
+                            requireContext().resources.getString(R.string.label_gender_female) ->
+                                requireContext().resources.getString(R.string.gender_female)
+                            requireContext().resources.getString(R.string.label_gender_unknown) ->
+                                requireContext().resources.getString(R.string.gender_unknown)
+                            requireContext().resources.getString(R.string.label_gender_genderless) ->
+                                requireContext().resources.getString(R.string.gender_genderless)
+                            else -> ""
+                        }
+                        onClick(status, gender)
                         openDialog()
                     },
                     modifier = modifier.align(Alignment.CenterHorizontally)
