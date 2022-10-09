@@ -64,6 +64,7 @@ class CharactersListFragment : Fragment() {
                             onClearClick = { viewModel.setFilterParams("", "") },
                             onClick = { status: String, gender: String ->
                                 viewModel.setFilterParams(status, gender)
+                                characters.refresh()
                             }
                         )
                         Spacer(modifier = Modifier.padding(top = 4.dp))
