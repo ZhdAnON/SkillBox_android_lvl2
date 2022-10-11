@@ -79,8 +79,7 @@ class CurrentCharacterFragment : Fragment() {
                                 type = args.character.type,
                                 url = args.character.url
                             ),
-                            loadEpisodes = { loadEpisodes() },
-                            loadOneEpisode = { loadOneEpisode() }
+                            loadEpisodes = { loadEpisodes() }
                         )
                     }
                 }
@@ -94,12 +93,6 @@ class CurrentCharacterFragment : Fragment() {
         return episodes
     }
 
-    @Composable
-    private fun loadOneEpisode(): EpisodeDto {
-        val episode: EpisodeDto by viewModel.episode.collectAsState()
-        return episode
-    }
-
     private fun goBack() {
         findNavController()
             .navigate(R.id.action_currentCharacterFragment_to_charactersListFragment)
@@ -110,7 +103,6 @@ class CurrentCharacterFragment : Fragment() {
 fun CharacterInfoView(
     character: ResultCharacter,
     loadEpisodes: @Composable () -> List<Episode>,
-    loadOneEpisode: @Composable () -> EpisodeDto,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -119,9 +111,7 @@ fun CharacterInfoView(
             .padding(top = 8.dp)
             .verticalScroll(rememberScrollState())
     ) {
-        val episodes =
-            if (character.episode.size > 1) loadEpisodes()
-            else loadOneEpisode()
+        val episodes = loadEpisodes()
         Log.d(TAG, "CharacterInfoView: ")
         GlideImageWithPreview(
             data = character.image,
@@ -151,10 +141,7 @@ fun CharacterInfoView(
             style = MaterialTheme.typography.h5,
             modifier = modifier.padding(top = 16.dp, start = 8.dp)
         )
-        when (episodes) {
-            is List<*> -> episodes.forEach { EpisodeItem(episode = it as Episode) }
-            else -> EpisodeItem(episode = episodes as Episode)
-        }
+        episodes.forEach { EpisodeItem(episode = it) }
     }
 }
 
@@ -300,8 +287,7 @@ fun CharacterInfoPreview() {
             Column {
                 CharacterInfoView(
                     character = character,
-                    loadEpisodes = { episodes },
-                    loadOneEpisode = { EpisodeDto("", emptyList(), "", "", 0, "", "") }
+                    loadEpisodes = { episodes }
                 )
                 episodes.forEach {
                     EpisodeItem(episode = it)

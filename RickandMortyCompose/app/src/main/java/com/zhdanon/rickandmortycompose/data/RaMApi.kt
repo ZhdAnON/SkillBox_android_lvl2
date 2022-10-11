@@ -18,9 +18,4 @@ interface RaMApi {
     suspend fun getEpisodeInfo(
         @Path("episode_id") episodeId: String
     ): List<EpisodeDto>
-
-    @GET("episode/{episode_id}")
-    suspend fun getOneEpisode(
-        @Path("episode_id") episodeId: String
-    ): EpisodeDto
 }

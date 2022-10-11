@@ -50,17 +50,14 @@ class RaMViewModel @Inject constructor(
                 val temp = it.removeRange(0, lastIndex + 1)
                 if (episodesId.isBlank()) episodesId.append(temp) else episodesId.append(",$temp")
             }
-            viewModelScope.launch(Dispatchers.IO) {
-                _episodes.value = ramUseCase.executeEpisodeInfo(episodesId.toString())
-            }
         } else {
             val fullEpisodeName = character.episode.first()
             val lastIndex = fullEpisodeName.lastIndexOf('/')
             val temp = fullEpisodeName.removeRange(0, lastIndex + 1)
-            if (episodesId.isBlank()) episodesId.append(temp) else episodesId.append(",$temp")
-            viewModelScope.launch(Dispatchers.IO) {
-                _oneEpisode.value = ramUseCase.executeOneEpisodeInfo(episodesId.toString())
-            }
+            episodesId.append(temp).append(",0")
+        }
+        viewModelScope.launch(Dispatchers.IO) {
+            _episodes.value = ramUseCase.executeEpisodeInfo(episodesId.toString())
         }
     }
 
