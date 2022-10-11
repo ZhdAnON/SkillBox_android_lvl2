@@ -21,9 +21,8 @@ class RaMRepository @Inject constructor() {
         return retrofit.getAllCharacters(count, pages, status, gender)
     }
 
-    suspend fun getEpisodeInfo(episodeId: String): List<EpisodeDto> {
-        return retrofit.getEpisodeInfo(episodeId)
-    }
+    suspend fun getEpisodeInfo(episodeId: String) =
+        retrofit.getEpisodeInfo(episodeId)
 
     companion object {
         private const val BASE_URL = "https://rickandmortyapi.com/api/"

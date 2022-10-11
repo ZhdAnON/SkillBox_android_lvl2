@@ -32,9 +32,7 @@ class CharactersListPagingSource(
         )
 
     companion object {
-        fun page(viewModel: RaMViewModel) = Pager(
-            config = PagingConfig(pageSize = 10),
-            pagingSourceFactory = { CharactersListPagingSource(viewModel) }
-        )
+        fun page(viewModel: RaMViewModel) =
+            Pager(PagingConfig(pageSize = 10)) { CharactersListPagingSource(viewModel) }.flow
     }
 }

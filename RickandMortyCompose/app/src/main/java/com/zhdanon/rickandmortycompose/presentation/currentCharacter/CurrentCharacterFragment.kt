@@ -133,7 +133,7 @@ fun CharacterInfoView(
         )
 
         Text(
-            text = "Episodes:",
+            text = stringResource(id = R.string.title_episodes),
             style = MaterialTheme.typography.h5,
             modifier = modifier.padding(top = 16.dp, start = 8.dp)
         )

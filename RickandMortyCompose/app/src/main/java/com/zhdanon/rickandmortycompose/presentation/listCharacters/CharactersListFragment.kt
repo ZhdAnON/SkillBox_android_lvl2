@@ -32,6 +32,9 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.zhdanon.rickandmortycompose.R
 import com.zhdanon.rickandmortycompose.data.characters.LocationDto
 import com.zhdanon.rickandmortycompose.data.characters.OriginDto
@@ -44,8 +47,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CharactersListFragment : Fragment() {
     private val viewModel: RaMViewModel by viewModels()
-
-    private val pagingData by lazy { CharactersListPagingSource.page(viewModel).flow }
+    private val pagingData by lazy { CharactersListPagingSource.page(viewModel) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,7 +60,8 @@ class CharactersListFragment : Fragment() {
                     color = MaterialTheme.colors.primary,
                     contentColor = MaterialTheme.colors.onPrimary
                 ) {
-                    val characters: LazyPagingItems<ResultCharacterDto> = pagingData.collectAsLazyPagingItems()
+                    val characters: LazyPagingItems<ResultCharacterDto> =
+                        pagingData.collectAsLazyPagingItems()
                     Column {
                         MyTopBar(
                             onClick = { status: String, gender: String ->
@@ -106,7 +109,7 @@ class CharactersListFragment : Fragment() {
                                 modifier = modifier.fillParentMaxSize(),
                                 contentAlignment = Alignment.Center
                             ) {
-                                CircularProgressIndicator()
+                                LoaderStatus()
                             }
                         }
                     }
@@ -116,7 +119,7 @@ class CharactersListFragment : Fragment() {
                                 modifier = modifier.fillParentMaxWidth(),
                                 contentAlignment = Alignment.Center
                             ) {
-                                CircularProgressIndicator()
+                                LoaderStatus()
                             }
                         }
                     }
@@ -124,8 +127,7 @@ class CharactersListFragment : Fragment() {
                         val e = list.loadState.refresh as LoadState.Error
                         item {
                             Column(
-                                modifier = modifier
-                                    .fillParentMaxSize(),
+                                modifier = modifier.fillParentMaxSize(),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
                                 e.error.localizedMessage?.let { Text(text = it) }
@@ -153,6 +155,12 @@ class CharactersListFragment : Fragment() {
                 }
             }
         }
+    }
+
+    @Composable
+    fun LoaderStatus() {
+        val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.load_state_lottie))
+        LottieAnimation(composition = composition)
     }
 
     @Composable
@@ -373,7 +381,7 @@ class CharactersListFragment : Fragment() {
                     }
                 }
 
-                // Фильтр по полу мужской/женский/неопределённый
+                // Фильтр по полу мужской/женский/безполый/неопределённый
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = modifier.padding(top = 4.dp, start = 8.dp)
@@ -452,22 +460,26 @@ class CharactersListFragment : Fragment() {
                 // Сохранение параметров фильтра
                 Button(
                     onClick = {
+                        val resources = requireContext().resources
                         val status = when (statusChecked) {
-                            requireContext().resources.getString(R.string.label_status_alive) ->
-                                requireContext().resources.getString(R.string.status_alive)
-                            requireContext().resources.getString(R.string.label_status_dead) ->
-                                requireContext().resources.getString(R.string.status_dead)
+                            resources.getString(R.string.label_status_alive) ->
+                                resources.getString(R.string.status_alive)
+                            resources.getString(R.string.label_status_dead) ->
+                                resources.getString(R.string.status_dead)
                             else -> ""
                         }
                         val gender = when (genderChecked) {
-                            requireContext().resources.getString(R.string.label_gender_male) ->
-                                requireContext().resources.getString(R.string.gender_male)
-                            requireContext().resources.getString(R.string.label_gender_female) ->
-                                requireContext().resources.getString(R.string.gender_female)
-                            requireContext().resources.getString(R.string.label_gender_unknown) ->
-                                requireContext().resources.getString(R.string.gender_unknown)
-                            requireContext().resources.getString(R.string.label_gender_genderless) ->
-                                requireContext().resources.getString(R.string.gender_genderless)
+                            resources.getString(R.string.label_gender_male) ->
+                                resources.getString(R.string.gender_male)
+
+                            resources.getString(R.string.label_gender_female) ->
+                                resources.getString(R.string.gender_female)
+
+                            resources.getString(R.string.label_gender_genderless) ->
+                                resources.getString(R.string.gender_genderless)
+
+                            resources.getString(R.string.label_gender_unknown) ->
+                                resources.getString(R.string.gender_unknown)
                             else -> ""
                         }
                         onClick(status, gender)

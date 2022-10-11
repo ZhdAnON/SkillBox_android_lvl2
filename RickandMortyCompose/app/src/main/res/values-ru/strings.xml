@@ -7,6 +7,7 @@
     <string name="title_species_gender">Раса и пол:</string>
     <string name="status_line">%s - %s</string>
     <string name="label_episodes">Список эпизодов, в которых появился этот персонаж:</string>
+    <string name="title_episodes">Эпизоды:</string>
 
     <string name="reload">Попробовать снова…</string>
 

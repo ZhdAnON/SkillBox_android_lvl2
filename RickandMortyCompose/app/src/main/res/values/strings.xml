@@ -7,6 +7,7 @@
     <string name="title_species_gender">Species and gender:</string>
     <string name="status_line">%s - %s</string>
     <string name="label_episodes">List of episodes in which this character appeared:</string>
+    <string name="title_episodes">Episodes:</string>
 
     <string name="reload">Try again…</string>
 

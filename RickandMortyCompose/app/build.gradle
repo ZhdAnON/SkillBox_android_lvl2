@@ -90,7 +90,8 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:2.43.1"
 
     // Lottie
-    implementation 'com.airbnb.android:lottie:5.0.3'
+//    implementation 'com.airbnb.android:lottie:5.0.3'
+    implementation "com.airbnb.android:lottie-compose:5.0.3"
 
     // Test
     testImplementation 'junit:junit:4.13.2'
