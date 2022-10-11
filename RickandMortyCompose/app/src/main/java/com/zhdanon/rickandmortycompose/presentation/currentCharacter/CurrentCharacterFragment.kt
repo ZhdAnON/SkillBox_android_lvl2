@@ -1,6 +1,7 @@
 package com.zhdanon.rickandmortycompose.presentation.currentCharacter
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,11 +35,13 @@ import com.zhdanon.rickandmortycompose.data.characters.LocationDto
 import com.zhdanon.rickandmortycompose.data.characters.OriginDto
 import com.zhdanon.rickandmortycompose.data.characters.ResultCharacterDto
 import com.zhdanon.rickandmortycompose.entity.Episode
-import com.zhdanon.rickandmortycompose.entity.ResultCharacter
+import com.zhdanon.rickandmortycompose.entity.characters.ResultCharacter
 import com.zhdanon.rickandmortycompose.presentation.GlideImageWithPreview
 import com.zhdanon.rickandmortycompose.presentation.RaMViewModel
 import com.zhdanon.rickandmortycompose.presentation.theme.ColorBackgroundItem
 import com.zhdanon.rickandmortycompose.presentation.theme.RaMTheme
+
+private const val TAG = "CurrentChar"
 
 class CurrentCharacterFragment : Fragment() {
     private val viewModel: RaMViewModel by activityViewModels()
@@ -76,7 +79,8 @@ class CurrentCharacterFragment : Fragment() {
                                 type = args.character.type,
                                 url = args.character.url
                             ),
-                            loadEpisodes = { loadEpisodes() }
+                            loadEpisodes = { loadEpisodes() },
+                            loadOneEpisode = { loadOneEpisode() }
                         )
                     }
                 }
@@ -85,9 +89,15 @@ class CurrentCharacterFragment : Fragment() {
     }
 
     @Composable
-    private fun loadEpisodes(): List<Episode> {
-        val episodes: List<Episode> by viewModel.episodes.collectAsState(initial = emptyList())
+    private fun loadEpisodes(): List<EpisodeDto> {
+        val episodes: List<EpisodeDto> by viewModel.episodes.collectAsState(initial = emptyList())
         return episodes
+    }
+
+    @Composable
+    private fun loadOneEpisode(): EpisodeDto {
+        val episode: EpisodeDto by viewModel.episode.collectAsState()
+        return episode
     }
 
     private fun goBack() {
@@ -100,6 +110,7 @@ class CurrentCharacterFragment : Fragment() {
 fun CharacterInfoView(
     character: ResultCharacter,
     loadEpisodes: @Composable () -> List<Episode>,
+    loadOneEpisode: @Composable () -> EpisodeDto,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -108,7 +119,10 @@ fun CharacterInfoView(
             .padding(top = 8.dp)
             .verticalScroll(rememberScrollState())
     ) {
-        val episodes = loadEpisodes()
+        val episodes =
+            if (character.episode.size > 1) loadEpisodes()
+            else loadOneEpisode()
+        Log.d(TAG, "CharacterInfoView: ")
         GlideImageWithPreview(
             data = character.image,
             modifier = modifier
@@ -137,7 +151,10 @@ fun CharacterInfoView(
             style = MaterialTheme.typography.h5,
             modifier = modifier.padding(top = 16.dp, start = 8.dp)
         )
-        episodes.forEach { EpisodeItem(episode = it) }
+        when (episodes) {
+            is List<*> -> episodes.forEach { EpisodeItem(episode = it as Episode) }
+            else -> EpisodeItem(episode = episodes as Episode)
+        }
     }
 }
 
@@ -283,7 +300,8 @@ fun CharacterInfoPreview() {
             Column {
                 CharacterInfoView(
                     character = character,
-                    loadEpisodes = { episodes }
+                    loadEpisodes = { episodes },
+                    loadOneEpisode = { EpisodeDto("", emptyList(), "", "", 0, "", "") }
                 )
                 episodes.forEach {
                     EpisodeItem(episode = it)

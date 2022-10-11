@@ -20,4 +20,8 @@ class GetRAMUseCase @Inject constructor(
     suspend fun executeEpisodeInfo(episodeId: String): List<EpisodeDto> {
         return ramRepository.getEpisodeInfo(episodeId)
     }
+
+    suspend fun executeOneEpisodeInfo(episodeId: String): EpisodeDto {
+        return ramRepository.getOneEpisodeInfo(episodeId)
+    }
 }

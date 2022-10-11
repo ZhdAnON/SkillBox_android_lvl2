@@ -1,4 +1,4 @@
-package com.zhdanon.rickandmortycompose.entity
+package com.zhdanon.rickandmortycompose.entity.characters
 
 interface Characters {
     val info: Info?

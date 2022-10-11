@@ -2,11 +2,11 @@ package com.zhdanon.rickandmortycompose.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zhdanon.rickandmortycompose.data.EpisodeDto
 import com.zhdanon.rickandmortycompose.data.FilterParams
 import com.zhdanon.rickandmortycompose.data.characters.CharactersDto
 import com.zhdanon.rickandmortycompose.data.characters.ResultCharacterDto
 import com.zhdanon.rickandmortycompose.domain.GetRAMUseCase
-import com.zhdanon.rickandmortycompose.entity.Episode
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,8 +25,13 @@ class RaMViewModel @Inject constructor(
         )
     )
 
-    private val _episodes = MutableStateFlow<List<Episode>>(emptyList())
+    private val _episodes = MutableStateFlow<List<EpisodeDto>>(emptyList())
     val episodes = _episodes.asStateFlow()
+
+    private val _oneEpisode = MutableStateFlow(
+        EpisodeDto("", emptyList(), "", "", 0, "", "")
+    )
+    val episode = _oneEpisode.asStateFlow()
 
     suspend fun loadCharacters(
         count: Int,
@@ -39,13 +44,23 @@ class RaMViewModel @Inject constructor(
 
     fun loadEpisodes(character: ResultCharacterDto) {
         val episodesId = StringBuilder()
-        character.episode.forEach {
-            val lastIndex = it.lastIndexOf('/')
-            val temp = it.removeRange(0, lastIndex + 1)
+        if (character.episode.size > 1) {
+            character.episode.forEach {
+                val lastIndex = it.lastIndexOf('/')
+                val temp = it.removeRange(0, lastIndex + 1)
+                if (episodesId.isBlank()) episodesId.append(temp) else episodesId.append(",$temp")
+            }
+            viewModelScope.launch(Dispatchers.IO) {
+                _episodes.value = ramUseCase.executeEpisodeInfo(episodesId.toString())
+            }
+        } else {
+            val fullEpisodeName = character.episode.first()
+            val lastIndex = fullEpisodeName.lastIndexOf('/')
+            val temp = fullEpisodeName.removeRange(0, lastIndex + 1)
             if (episodesId.isBlank()) episodesId.append(temp) else episodesId.append(",$temp")
-        }
-        viewModelScope.launch(Dispatchers.IO) {
-            _episodes.value = ramUseCase.executeEpisodeInfo(episodesId.toString())
+            viewModelScope.launch(Dispatchers.IO) {
+                _oneEpisode.value = ramUseCase.executeOneEpisodeInfo(episodesId.toString())
+            }
         }
     }
 

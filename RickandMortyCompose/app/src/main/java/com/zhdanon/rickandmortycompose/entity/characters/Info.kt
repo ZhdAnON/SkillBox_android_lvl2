@@ -1,4 +1,4 @@
-package com.zhdanon.rickandmortycompose.entity
+package com.zhdanon.rickandmortycompose.entity.characters
 
 interface Info {
     val count: Int?

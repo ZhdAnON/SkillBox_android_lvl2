@@ -3,7 +3,7 @@ package com.zhdanon.rickandmortycompose.data.characters
 import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import com.zhdanon.rickandmortycompose.entity.Characters
+import com.zhdanon.rickandmortycompose.entity.characters.Characters
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
