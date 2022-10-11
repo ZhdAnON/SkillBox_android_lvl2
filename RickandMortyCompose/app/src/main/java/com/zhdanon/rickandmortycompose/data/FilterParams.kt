@@ -1,8 +1,8 @@
 package com.zhdanon.rickandmortycompose.data
 
 class FilterParams(
-    private val status: String = "",
-    private val gender: String = ""
+    status: String = "",
+    gender: String = ""
 ) {
     var paramStatus = status
         set(value) {
@@ -25,6 +25,7 @@ class FilterParams(
             "",
             "Male",
             "Female",
+            "Genderless",
             "Unknown"
         )
     }
