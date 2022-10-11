@@ -61,6 +61,8 @@ dependencies {
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
     implementation "com.google.android.material:compose-theme-adapter:1.1.20"
 
+    // Compose navigation
+    implementation "androidx.navigation:navigation-compose:$nav_version"
 
     // Compose Paging
     implementation 'androidx.paging:paging-compose:1.0.0-alpha16'
@@ -72,17 +74,19 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
     implementation 'androidx.activity:activity-compose:1.6.0'
 
-    // Coil
-    implementation("io.coil-kt:coil-compose:1.3.2")
+    // Fragment navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
 
+    // Coil
+    implementation "io.coil-kt:coil-compose:1.3.2"
+    
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
     // Moshi
     implementation 'com.squareup.moshi:moshi:1.14.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.14.0'
 
     // Hilt
@@ -90,7 +94,6 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:2.43.1"
 
     // Lottie
-//    implementation 'com.airbnb.android:lottie:5.0.3'
     implementation "com.airbnb.android:lottie-compose:5.0.3"
 
     // Test
