@@ -25,11 +25,24 @@ class RaMViewModel @Inject constructor(
         )
     )
 
+    private lateinit var characterForDetail: ResultCharacterDto
+
+    fun setCharacterForDetail(character: ResultCharacterDto) { characterForDetail = character }
+    fun getCharacterForDetail() = characterForDetail
+
     private val _episodes = MutableStateFlow<List<EpisodeDto>>(emptyList())
     val episodes = _episodes.asStateFlow()
 
     private val _oneEpisode = MutableStateFlow(
-        EpisodeDto("", emptyList(), "", "", 0, "", "")
+        EpisodeDto(
+            airDate = "",
+            characters = emptyList(),
+            created = "",
+            episode = "",
+            id = 0,
+            name = "",
+            url = ""
+        )
     )
     val episode = _oneEpisode.asStateFlow()
 

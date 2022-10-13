@@ -1,4 +1,4 @@
-package com.zhdanon.rickandmortycompose.presentation.listCharacters
+package com.zhdanon.rickandmortycompose.presentation.charactersList
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig

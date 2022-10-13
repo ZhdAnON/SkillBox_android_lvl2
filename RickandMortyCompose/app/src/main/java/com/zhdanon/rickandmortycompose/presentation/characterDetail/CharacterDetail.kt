@@ -1,4 +1,4 @@
-package com.zhdanon.rickandmortycompose.presentation.currentCharacter
+package com.zhdanon.rickandmortycompose.presentation.characterDetail
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -26,19 +26,20 @@ import com.zhdanon.rickandmortycompose.entity.Episode
 import com.zhdanon.rickandmortycompose.entity.characters.ResultCharacter
 import com.zhdanon.rickandmortycompose.presentation.GlideImageWithPreview
 import com.zhdanon.rickandmortycompose.presentation.RaMViewModel
+import com.zhdanon.rickandmortycompose.presentation.navigation.Screen
 import com.zhdanon.rickandmortycompose.presentation.theme.ColorBackgroundItem
 
 @Composable
 fun CharacterDetail(
     navController: NavController,
-    viewModel: RaMViewModel,
-    character: ResultCharacterDto
+    viewModel: RaMViewModel
 ) {
     val episodes: List<EpisodeDto> by viewModel.episodes.collectAsState(initial = emptyList())
+    val character = viewModel.getCharacterForDetail()
     viewModel.loadEpisodes(character)
     Column {
         MyTopBar(
-            onClick = { navController.navigate("first_screen") },
+            onClick = { navController.navigate(Screen.CharacterListScreen.route) },
             character = character
         )
         CharacterInfoView(

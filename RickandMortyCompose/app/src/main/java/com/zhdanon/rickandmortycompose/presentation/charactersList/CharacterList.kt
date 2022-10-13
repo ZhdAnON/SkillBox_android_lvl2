@@ -1,7 +1,6 @@
-package com.zhdanon.rickandmortycompose.presentation.listCharacters
+package com.zhdanon.rickandmortycompose.presentation.charactersList
 
 import android.content.Context
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -29,12 +28,10 @@ import androidx.paging.compose.items
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.google.gson.Gson
 import com.zhdanon.rickandmortycompose.R
 import com.zhdanon.rickandmortycompose.data.characters.ResultCharacterDto
 import com.zhdanon.rickandmortycompose.presentation.GlideImageWithPreview
 import com.zhdanon.rickandmortycompose.presentation.RaMViewModel
-import com.zhdanon.rickandmortycompose.presentation.navigation.MyTestClass
 import com.zhdanon.rickandmortycompose.presentation.navigation.Screen
 
 @Composable
@@ -43,7 +40,7 @@ fun CharacterList(
     navController: NavController,
     viewModel: RaMViewModel
 ) {
-    val pagingData by lazy { CharactersListPagingSource.page(viewModel) }
+    val pagingData by     lazy { CharactersListPagingSource.page(viewModel) }
     val characters: LazyPagingItems<ResultCharacterDto> =
         pagingData.collectAsLazyPagingItems()
 
@@ -60,18 +57,8 @@ fun CharacterList(
             }
         )
         Spacer(modifier = Modifier.padding(top = 4.dp))
-        Button(
-            onClick = {
-                val personJson = Gson().toJson(MyTestClass(
-                    name = "Чингачгук",
-                    age = 28
-                ))
-                navController.navigate(Screen.MyTestScreen.route + "/$personJson")
-            }
-        ) {
-            Text(text = "Go to Test Screen")
-        }
         CharactersListView(
+            viewModel = viewModel,
             navController = navController,
             list = characters
         )
@@ -81,6 +68,7 @@ fun CharacterList(
 
 @Composable
 private fun CharactersListView(
+    viewModel: RaMViewModel,
     navController: NavController,
     list: LazyPagingItems<ResultCharacterDto>,
     modifier: Modifier = Modifier
@@ -89,6 +77,7 @@ private fun CharactersListView(
         items(list) {
             it?.let {
                 ItemCharacter(
+                    viewModel = viewModel,
                     navController = navController,
                     character = it,
                     modifier = modifier.padding(vertical = 4.dp)
@@ -201,6 +190,7 @@ fun MyTopBar(
 
 @Composable
 fun ItemCharacter(
+    viewModel: RaMViewModel,
     navController: NavController,
     character: ResultCharacterDto,
     modifier: Modifier = Modifier
@@ -222,10 +212,8 @@ fun ItemCharacter(
                     .size(150.dp)
                     .clip(CircleShape)
                     .clickable {
-                        val characterJson = Gson().toJson(character)
-                        Log.d("ItemCharacter", characterJson)
-                        navController
-                            .navigate(Screen.CharacterDetailScreen.route + "/$characterJson")
+                        viewModel.setCharacterForDetail(character)
+                        navController.navigate(Screen.CharacterDetailScreen.route)
                     }
             )
             Spacer(
