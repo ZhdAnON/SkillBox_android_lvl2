@@ -10,4 +10,3 @@ val Red900 = Color(0xffc20029)
 
 val ColorBackgroundItem = Color(0xff5A4C4C)
 val ColorBackgroundMain = Color(0xff6C5555)
-val ColorTextLabel = Color.White

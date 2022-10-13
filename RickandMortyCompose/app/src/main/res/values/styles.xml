@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.RickAndMorty" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:statusBarColor">@color/statusBarColor</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">?attr/colorSurface</item>
+    </style>
+</resources>
