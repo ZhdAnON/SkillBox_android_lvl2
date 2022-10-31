@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Bike Factory</string>
+    <string name="app_name">Изобретая велосипед…</string>
+    <string name="create_bike">Изобрести велосипед</string>
+    <string name="start_bike_logo">Марка велосипеда: __________</string>
+    <string name="bike_logo">Марка велосипеда: %s</string>
+    <string name="start_frame_number">Номер рамы: __________</string>
+    <string name="frame_number">Номер рамы: %s</string>
+    <string name="start_wheel_number">Номер колеса: __________</string>
+    <string name="wheel_number">Номер колеса: %s</string>
 </resources>
