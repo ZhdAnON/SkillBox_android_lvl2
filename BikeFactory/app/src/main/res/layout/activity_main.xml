@@ -44,20 +44,6 @@
         app:layout_constraintTop_toTopOf="@id/bike_image" />
 
     <TextView
-        android:id="@+id/tv_frame_color"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/teal_200"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="@string/start_frame_color"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_frame" />
-
-    <TextView
         android:id="@+id/tv_wheel_back"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
@@ -83,15 +69,33 @@
         app:layout_constraintBottom_toBottomOf="@id/bike_image"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_create_bike"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_create_bike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         android:text="@string/create_bike"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_dagger"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_dagger"
+        android:text="@string/btn_dagger"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/btn_koin"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_koin"
+        android:text="@string/btn_koin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_dagger"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

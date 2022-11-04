@@ -24,4 +24,15 @@ class BicycleViewModel(
             _bike.send(currentBike)
         }
     }
+
+    fun createBikeKoin(
+        frame: String,
+        logo: String,
+        color: Int
+    ) {
+        currentBike = bikeFactory.createBicycle(logo, frame, color)
+        kotlinx.coroutines.runBlocking {
+            _bike.send(currentBike)
+        }
+    }
 }

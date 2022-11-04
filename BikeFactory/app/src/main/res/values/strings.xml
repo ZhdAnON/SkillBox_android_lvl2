@@ -9,4 +9,6 @@
     <string name="wheel_number">Номер колеса: %s</string>
     <string name="start_frame_color">Цвет рамы: ______</string>
     <string name="frame_color">Цвет рамы: %s</string>
+    <string name="btn_dagger">Dagger</string>
+    <string name="btn_koin">Koin</string>
 </resources>
