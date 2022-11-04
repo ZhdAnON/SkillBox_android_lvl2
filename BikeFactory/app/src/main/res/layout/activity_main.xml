@@ -33,7 +33,7 @@
         android:id="@+id/tv_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="50dp"
         android:background="@color/teal_200"
         android:gravity="center"
         android:padding="8dp"
@@ -41,32 +41,46 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/bike_image" />
+
+    <TextView
+        android:id="@+id/tv_frame_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/teal_200"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/start_frame_color"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_frame" />
 
     <TextView
         android:id="@+id/tv_wheel_back"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="50dp"
         android:background="@color/teal_200"
         android:gravity="start"
         android:padding="8dp"
         android:text="@string/start_wheel_number"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/btn_create_bike"
+        app:layout_constraintBottom_toBottomOf="@id/bike_image"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_wheel_front"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="50dp"
         android:background="@color/teal_200"
         android:gravity="end"
         android:padding="8dp"
         android:text="@string/start_wheel_number"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/btn_create_bike"
+        app:layout_constraintBottom_toBottomOf="@id/bike_image"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton

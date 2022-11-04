@@ -1,16 +1,13 @@
 package com.zhdanon.bikefactory.presentation
 
 import androidx.lifecycle.ViewModel
-import com.zhdanon.bikefactory.data.BikeFactory
+import com.zhdanon.bikefactory.data.FactoryBicycle
 import com.zhdanon.bikefactory.entity.Bike
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
-import javax.inject.Inject
 
-@HiltViewModel
-class ViewModelBike @Inject constructor(
-    private val bikeFactory: BikeFactory
+class BicycleViewModel(
+    val bikeFactory: FactoryBicycle
 ) : ViewModel() {
     private lateinit var currentBike: Bike
 
@@ -20,9 +17,9 @@ class ViewModelBike @Inject constructor(
     fun createBikeDagger(
         frame: String,
         logo: String,
-        isMTB: Boolean
+        color: Int
     ) {
-        currentBike = bikeFactory.createBike(logo, frame, isMTB)
+        currentBike = bikeFactory.createBicycle(logo, frame, color)
         kotlinx.coroutines.runBlocking {
             _bike.send(currentBike)
         }
