@@ -1,4 +1,4 @@
-package com.zhdanon.bikefactory.dagger
+package com.zhdanon.bikefactory.di.dagger
 
 import com.zhdanon.bikefactory.presentation.MainActivity
 import dagger.Component

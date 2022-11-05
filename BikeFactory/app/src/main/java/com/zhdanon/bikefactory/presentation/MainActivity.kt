@@ -2,15 +2,13 @@ package com.zhdanon.bikefactory.presentation
 
 import android.graphics.Color
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.zhdanon.bikefactory.App
 import com.zhdanon.bikefactory.R
 import com.zhdanon.bikefactory.databinding.ActivityMainBinding
-import org.koin.android.ext.android.get
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -24,13 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: BicycleViewModel
 
     // for Koin
-    private val viewModelKoin: BicycleViewModel by viewModels {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return BicycleViewModel(bikeFactory = get()) as T
-            }
-        }
-    }
+    private val viewModelKoin by viewModel<BicycleViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
