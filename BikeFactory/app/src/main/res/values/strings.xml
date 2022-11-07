@@ -11,4 +11,5 @@
     <string name="frame_color">Цвет рамы: %s</string>
     <string name="btn_dagger">Dagger</string>
     <string name="btn_koin">Koin</string>
+    <string name="btn_create">Создать</string>
 </resources>

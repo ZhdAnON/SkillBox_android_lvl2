@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/koin_bike_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/teal_700"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/start_bike_logo"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/koin_bike_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bike"
+        app:layout_constraintBottom_toTopOf="@id/koin_create"
+        app:layout_constraintTop_toBottomOf="@id/koin_bike_logo" />
+
+    <TextView
+        android:id="@+id/tv_koin_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@color/teal_200"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/start_frame_number"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/koin_bike_image" />
+
+    <TextView
+        android:id="@+id/tv_koin_wheel_back"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:background="@color/teal_200"
+        android:gravity="start"
+        android:padding="8dp"
+        android:text="@string/start_wheel_number"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/koin_bike_image"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_koin_wheel_front"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:background="@color/teal_200"
+        android:gravity="end"
+        android:padding="8dp"
+        android:text="@string/start_wheel_number"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/koin_bike_image"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/koin_create"
+        android:text="@string/btn_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
